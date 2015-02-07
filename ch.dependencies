@@ -8,7 +8,7 @@
     {
     "remote": "tm",
     "repository": "proprietary_vendor_motorola",
-    "target_path": "vendor/htc",
+    "target_path": "vendor/motorola",
     "revision": "cm-12.0"
   }
 ]
