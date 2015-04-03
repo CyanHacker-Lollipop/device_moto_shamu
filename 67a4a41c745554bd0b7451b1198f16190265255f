@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a106d94_e7823f51",
+        "filename": "ch.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003174
+      },
+      "writtenOn": "2015-04-03T17:04:41Z",
+      "side": 1,
+      "message": "set that to false until bug is fixed",
+      "range": {
+        "startLine": 19,
+        "startChar": 19,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "67a4a41c745554bd0b7451b1198f16190265255f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
