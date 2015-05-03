@@ -3,11 +3,23 @@
 USE_OPTIMIZATIONS := true
 
 ifneq ($(strip $(USE_OPTIMIZATIONS)),false)
+include vendor/ch/config/sm_clear_vars.mk
+# Find host os
+UNAME := $(shell uname -s)
+
+ifeq ($(strip $(UNAME)),Linux)
+  HOST_OS := linux
+endif
+
+# Only use these compilers on linux host.
+ifeq ($(strip $(HOST_OS)),linux)
 #HACKIFY CONFIGURATION 
 
-##Define ROM toolchain and LIB Verison(should be the same version number as the toolchain)
-TARGET_GCC_AND := 4.8-sm
-TARGET_LIB_VERSION := 4.8
+##Define ROM toolchain
+TARGET_GCC_AND := 4.9-sm
+
+##Define NDK toolchain
+TARGET_NDK_VERSION := 4.9
 
 ##Define Kernel toolchain
 TARGET_GCC_ARM := 4.9-sm
@@ -15,11 +27,25 @@ TARGET_GCC_ARM := 4.9-sm
 ##Enable Pthread (only on newer devices)
 ENABLE_PTHREAD := true
 
-##Enable O3 Optimizations
-O3_OPTIMIZATIONS:= false
+##Use Kernel Optimizations?
+USE_KERNEL_OPTIMIZATIONS := true
 
-##Enable ArchiDroid Optimizations
-ARCHIDROID_OPTIMIZATIONS := true
+##How many threads does the device have?
+PRODUCT_THREADS := 4
+
+GRAPHITE_KERNEL_FLAGS := \
+    -floop-parallelize-all \
+    -ftree-parallelize-loops=$(PRODUCT_THREADS) \
+    -fopenmp
+
+# Extra SaberMod GCC C flags for arch target and Kernel
+export EXTRA_SABERMOD_GCC_VECTORIZE_CFLAGS := \
+         -ftree-vectorize \
+         -mvectorize-with-neon-quad
+
+else
+$(error *  Please compile on a Linux host OS to use this optimizations)
+endif
 endif
 #################################################
 
